@@ -1,8 +1,16 @@
 import streamlit as st
 import requests
 import os
+import logging
 
 API_URL = os.getenv("BACKEND_URL", "http://backend_api:8000/query")
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 st.title("Personal Knowledge Assistant")
 
@@ -14,6 +22,10 @@ if st.button("Submit") and question.strip():
         resp = requests.post(API_URL, json={"question": question})
         if resp.status_code == 200:
             data = resp.json()
+            # Log to app logs
+            logger.info(f"Received data: {data}")
+            logger.info(f"Answer: {data.get('answer')}")
+            
             st.markdown("### Answer")
             st.write(data["answer"])
             st.markdown("### Sources")

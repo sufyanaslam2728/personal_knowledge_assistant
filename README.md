@@ -85,7 +85,7 @@ This will:
 To ingest your documents (PDFs, TXT, MD, etc.), place them inside the `data` folder, then run:
 
 ```bash
-docker compose run ingest python -m ingest.cli --input data/
+docker compose run ingest python -m ingest.cli --path data/raw
 ```
 
 This will process documents and store embeddings for LLM queries.

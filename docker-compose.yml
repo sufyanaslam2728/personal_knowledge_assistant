@@ -46,7 +46,7 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - ./app:/app/app:ro
+      - ./app:/app/app:rw
     depends_on:
       - backend_api
 
