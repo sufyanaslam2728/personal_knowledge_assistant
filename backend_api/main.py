@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+import time
 from pydantic import BaseModel
 import os
 from ingest.embedder import Embedder
@@ -57,6 +58,7 @@ def query_rag(payload: QueryRequest):
     """
     Perform Retrieval-Augmented Generation (RAG) on user query.
     """
+    start_time = time.perf_counter()
     print("Payload", payload)
     try:
         # Embed query and search
@@ -71,7 +73,14 @@ def query_rag(payload: QueryRequest):
 
         # Generate final answer
         answer = chain.run(context=context, question=payload.question)
+        
+        total_time = time.perf_counter() - start_time  # ⏱ end timer
+        print(f"⏱ Total time taken: {total_time:.2f} seconds")
+
         return {"answer": answer, "sources": results}
 
     except Exception as e:
+        total_time = time.perf_counter() - start_time  # ⏱ end timer
+        print(f"⏱ Total time taken: {total_time:.2f} seconds")
+        
         raise HTTPException(status_code=500, detail=str(e))
