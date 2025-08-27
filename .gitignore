@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit
+.streamlit/
+
+# Environment Variables
+.env
+.env.*
+
+# Data & Models
+
+*.db
+*.sqlite3
+*.sqlite
+
+# Logs
+*.log
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Build / Dist
+build/
+dist/
+*.egg-info/
+.eggs/
